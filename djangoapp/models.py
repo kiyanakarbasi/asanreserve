@@ -9,7 +9,7 @@ class Vehicle(models.Model):
 
 class Travel(models.Model):
     vehicle      = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    datetime     = models.modelsDateTimeField()
+    datetime     = models.DateTimeField()
     origin       = models.CharField(max_length=100)
     destination  = models.CharField(max_length=100)
     is_two_way   = models.BooleanField(default=False)
@@ -23,6 +23,6 @@ class Buyer(models.Model):
 
 
 class Tickets(models.Model):
-    travel       = Models.ForeignKey(Travel, on_delete=models.CASCADE)
-    buyer        = Models.ForeignKey(Buyer, on_delete=models.CASCADE)
+    travel       = models.ForeignKey(Travel, on_delete=models.CASCADE)
+    buyer        = models.ForeignKey(Buyer, on_delete=models.CASCADE)
     seat_number  = models.IntegerField()
