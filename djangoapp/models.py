@@ -22,7 +22,7 @@ class Buyer(models.Model):
     buyer_sex    = models.CharField(max_length=10)
 
 
-class Tickets(models.Model):
+class Ticket(models.Model):
     travel       = models.ForeignKey(Travel, on_delete=models.CASCADE)
     buyer        = models.ForeignKey(Buyer, on_delete=models.CASCADE)
     seat_number  = models.IntegerField()
