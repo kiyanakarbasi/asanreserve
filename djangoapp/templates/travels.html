@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title>index | asanreserve</title>
+{% endblock %}
+
+{% block body %}
+{% load static %}
+<div>
+    <h1>Travels</h1>
+    <div>
+        {% for travel in travels %}
+        <div>
+            {{ travel.vehicle.vehicle_type }}
+            <br>
+            {{ travel.datetime }}
+            <br>
+            {{ travel.origin }}
+            <br>
+            {{ travel.destination }}
+            <br>
+            {{ travel.is_two_way|yesno:"دو طرفه,یک طرفه" }}
+            <br>
+            {{ travel.price }}
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

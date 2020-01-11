@@ -1,32 +1,83 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block head %}
 <title>index | asanreserve</title>
 {% endblock %}
 
 {% block body %}
 {% load static %}
-<h1>Index Page</h1>
-<div>
-    {% if not request.user.is_authenticated %}
 
-    <h3>Login</h3>
-    <form method="POST">{% csrf_token %}
-        <input type="text" name="username" required="" id="id_username" placeholder="Username">
-        <input type="password" name="password" required="" id="id_password" placeholder="Password">
+  <div class="container" style="height: 200px;">
+  </div>
 
-        <button type="submit">Login</button>
-
-    </form>
-
-    {% else %}
-
-    <h3>Menu</h3>
-    <ul>
-        <li><a href="/logout">Logout</a></li>
-    </ul>
-
-    {% endif %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="text-center">
+        <h2>Asan Reserve</h2>
+        <p>Ba ma reserve konid<br>Asan tar az hamishe</p>
+      </div>
+      <hr>
+    </div>
+  </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="box">
+      <div class="col-md-3">
+        <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
+          <h4>Bus</h4>
+          <div class="icon">
+            <i class="fa fa-heart-o fa-3x"></i>
+          </div>
+          <div class="ficon">
+            <a href="/travels/?type=bus" class="btn btn-default" role="button">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.0s">
+          <h4>Taxi</h4>
+          <div class="icon">
+            <i class="fa fa-desktop fa-3x"></i>
+          </div>
+          <div class="ficon">
+            <a href="/travels/?type=taxi" class="btn btn-default" role="button">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.6s">
+          <h4>Ship</h4>
+          <div class="icon">
+            <i class="fa fa-location-arrow fa-3x"></i>
+          </div>
+          <div class="ficon">
+            <a href="/travels/?type=ship" class="btn btn-default" role="button">Buy</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+        <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.6s">
+          <h4>Train</h4>
+          <div class="icon">
+            <i class="fa fa-location-arrow fa-3x"></i>
+          </div>
+          <div class="ficon">
+            <a href="/travels/?type=train" class="btn btn-default" role="button">Buy</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
