@@ -1,31 +1,32 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-<title>index | asanreserve</title>
+<title>travels | asanreserve</title>
 {% endblock %}
 
 {% block body %}
 {% load static %}
-<div>
-    <h1>Travels</h1>
-    <div>
+
+<div class="container">
+    <div class="row">
         {% for travel in travels %}
-        <div>
-            {{ travel.vehicle.vehicle_type }}
-            <br>
-            {{ travel.datetime }}
-            <br>
-            {{ travel.origin }}
-            <br>
-            {{ travel.destination }}
-            <br>
-            {{ travel.is_two_way|yesno:"دو طرفه,یک طرفه" }}
-            <br>
-            {{ travel.price }}
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    {{ travel.vehicle.vehicle_type }}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">time: {{ travel.datetime }}</li>
+                    <li class="list-group-item">origin: {{ travel.origin }}</li>
+                    <li class="list-group-item">destination: {{ travel.destination }}</li>
+                    <li class="list-group-item">{{ travel.is_two_way|yesno:"two way,one way" }}</li>
+                    <li class="list-group-item">price: {{ travel.price }}T</li>
+                </ul>
+                <a href="{% url 'travel' id=travel.id %}" class="btn btn-primary">Buy ticket</a>
+            </div>
         </div>
         {% endfor %}
     </div>
-
 </div>
 
 {% endblock %}

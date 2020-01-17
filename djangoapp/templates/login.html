@@ -6,12 +6,9 @@
 
 {% block body %}
 {% load static %}
-<div>
-    <h1>Index Page</h1>
+<div class="container">
+    <h1>Login</h1>
     <div>
-        {% if not request.user.is_authenticated %}
-
-        <h3>Login</h3>
         <form method="POST">{% csrf_token %}
             <input type="text" name="username" required="" id="id_username" placeholder="Username">
             <input type="password" name="password" required="" id="id_password" placeholder="Password">
@@ -19,15 +16,6 @@
             <button type="submit">Login</button>
 
         </form>
-
-        {% else %}
-
-        <h3>Menu</h3>
-        <ul>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-
-        {% endif %}
     </div>
 
 </div>

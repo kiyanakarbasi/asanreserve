@@ -38,11 +38,11 @@
         <div class="menu">
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/travels/">Travels</a></li>
+            <li role="presentation"><a href="{% url 'travels' %}">Travels</a></li>
             {% if request.user.is_authenticated %}
-            <li role="presentation" class="active"><a href="/logout/">Logout</a></li>
+            <li role="presentation" class="active"><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
-            <li role="presentation" class="active"><a href="/login/">Login</a></li>
+            <li role="presentation" class="active"><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
           </ul>
         </div>
@@ -50,6 +50,8 @@
     </div>
   </nav>
   <div style="min-height:90%; height:1px;">
+    <div class="container" style="height: 150px;">
+    </div>
     {% block body %}
     {% endblock %}
   </div>
