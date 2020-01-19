@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-<title>travels | asanreserve</title>
+<title>travel | asanreserve</title>
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,6 @@
 
 <div class="container">
     <div class="row">
-        {% for travel in travels %}
         <div class="col-lg-3">
             <div class="card" style="width: 18rem; padding-bottom: 50px;">
                 <div class="card-header">
@@ -22,11 +21,11 @@
                     <li class="list-group-item">{{ travel.is_two_way|yesno:"two way,one way" }}</li>
                     <li class="list-group-item">price: {{ travel.price }}T</li>
                     <li class="list-group-item">capasity: {{ travel.vehicle.capacity }}</li>
+                    <li class="list-group-item">free capasity: {{ info.free }}</li>
+
                 </ul>
-                <a href="{% url 'travel' id=travel.id %}" class="btn btn-primary">Buy ticket</a>
             </div>
         </div>
-        {% endfor %}
     </div>
 </div>
 

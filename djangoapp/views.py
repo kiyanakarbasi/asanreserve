@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as auth_logut
 
@@ -22,7 +24,7 @@ def travels(request):
         travels = models.Travel.objects.filter(vehicle__vehicle_type=request.GET['type'])
 
     else:
-        travels = models.Travel.objects.all()
+        travels = models.Travel.objects.filter(datetime__gte=datetime.now())
 
 
     response = {
@@ -34,4 +36,20 @@ def travels(request):
 
 
 def travel(request, id):
-    return render()
+    if request.method
+
+
+
+    travel = models.Travel.objects.get(id=id)
+    seats = set(range(1, 1 + travel.vehicle.capacity)) - \
+                set([i.seat_number for i in list(models.Ticket.objects.all().filter(travel=id))])
+
+    response = {
+        'travel': travel,
+        'info':{
+            'seats': seats,
+            'free': len(seats),
+        }
+    }
+
+    return render(request, 'travel.html', response)
