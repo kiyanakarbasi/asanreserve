@@ -21,34 +21,24 @@
                     <li class="list-group-item">{{ travel.is_two_way|yesno:"two way,one way" }}</li>
                     <li class="list-group-item">price: {{ travel.price }}T</li>
                     <li class="list-group-item">capasity: {{ travel.vehicle.capacity }}</li>
-                    <li class="list-group-item">free capasity: {{ info.free }}</li>
-
                 </ul>
             </div>
         </div>
         <div class="col-lg-3">
-            <h1>Ticket Form</h1>
-            <div>
-                <form method="POST">{% csrf_token %}
-                    <input type="text" name="buyer_name" required placeholder="Name">
-                    <input type="text" name="buyer_phone" required placeholder="Phone">
-                    <select name="buyer_sex">
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                    </select>
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    ticket information
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ticket id: {{ ticket.id }}</li>
+                    <li class="list-group-item">name: {{ ticket.buyer_name }}</li>
+                    <li class="list-group-item">phone: {{ ticket.buyer_phone }}</li>
+                    <li class="list-group-item">seat number: {{ ticket.seat_number }}</li>
 
-                    <input hidden type="text" name="travel" value="{{ travel.id }}">
-                    <select name="seat_number">
-                        {% for i in info.seats %}
-                        <option value="{{ i }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
+                </ul>
+                <input type="button" value="Print this page" onClick="window.print()">
 
-                    <button type="submit">Buy</button>
-
-                </form>
             </div>
-
         </div>
     </div>
 

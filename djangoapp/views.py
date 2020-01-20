@@ -9,7 +9,6 @@ from . import forms, models
 def logout(request):
 
     auth_logut(request)
-
     return redirect('/')
 
 
@@ -36,13 +35,16 @@ def travels(request):
 
 
 def travel(request, id):
-    if request.method
 
+    if request.method == 'POST':
+        ticketform = forms.TicketForm(request.POST)
+        ticket = ticketform.save()
 
+        return redirect(f'/ticket/{ticket.id}')
 
     travel = models.Travel.objects.get(id=id)
     seats = set(range(1, 1 + travel.vehicle.capacity)) - \
-                set([i.seat_number for i in list(models.Ticket.objects.all().filter(travel=id))])
+                set([i.seat_number for i in list(models.Ticket.objects.filter(travel=id))])
 
     response = {
         'travel': travel,
@@ -53,3 +55,14 @@ def travel(request, id):
     }
 
     return render(request, 'travel.html', response)
+
+
+
+def ticket(request, id):
+    ticket = models.Ticket.objects.get(id=id)
+
+    response = {
+        'ticket': ticket,
+        'travel': ticket.travel,
+    }
+    return render(request, 'ticket.html', response)

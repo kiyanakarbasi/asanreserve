@@ -15,13 +15,7 @@ class TravelForm(forms.ModelForm):
         fields = ['vehicle', 'datetime', 'origin', 'destination', 'is_two_way', 'price']
 
 
-class BuyerForm(forms.ModelForm):
-    class Meta:
-        model = models.Buyer
-        fields = ['buyer_name', 'buyer_phone', 'buyer_sex']
-
-
 class TicketForm(forms.ModelForm):
     class Meta:
         model = models.Ticket
-        fields = ['travel', 'buyer', 'seat_number']
+        fields = ['travel', 'seat_number', 'buyer_name', 'buyer_phone', 'buyer_sex']
