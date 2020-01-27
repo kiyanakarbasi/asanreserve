@@ -1,13 +1,19 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
+
 class Vehicle(models.Model):
+    admin        = models.ForeignKey(User, on_delete=models.CASCADE)
     vehicle_type = models.CharField(max_length=100)
     capacity     = models.IntegerField()
     plaque       = models.CharField(max_length=100)
 
+
     def __str__(self):
         return 'vehicle_type={} - plaque={}'.format(self.vehicle_type, self.plaque)
+
+
 
 
 class Travel(models.Model):
@@ -18,8 +24,11 @@ class Travel(models.Model):
     is_two_way   = models.BooleanField(default=False)
     price        = models.IntegerField()
 
+
     def __str__(self):
         return 'vehicle={} - price={}'.format(self.vehicle, self.price)
+
+
 
 
 class Ticket(models.Model):
@@ -29,5 +38,7 @@ class Ticket(models.Model):
     buyer_phone  = models.CharField(max_length=20)
     buyer_sex    = models.CharField(max_length=10)
 
+
     def __str__(self):
         return 'seat_number={} - travel={}'.format(self.seat_number, self.travel)
+
