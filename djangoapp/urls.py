@@ -9,8 +9,12 @@ urlpatterns = [
     path('travel/<int:id>', views.travel, name='travel'),
     path('ticket/<int:id>', views.ticket, name='ticket'),
 
+    path('travel/edit/<int:id>', views.travel_edit, name='travel_edit'),
+    path('travel/delete/<int:id>', views.travel_delete, name='travel_delete'),
+    path('vehicle/delete/<int:id>', views.vehicle_delete, name='vehicle_delete'),
 
-    # path('admin_page', views.vehicle, name='vehicle'),
+
+    path('panel/', views.panel, name='panel'),
 
 
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),

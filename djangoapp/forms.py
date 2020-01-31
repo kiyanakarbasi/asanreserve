@@ -6,13 +6,7 @@ from . import models
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = models.Vehicle
-        fields = ['vehicle_type', 'capacity', 'plaque']
-
-
-class TravelForm(forms.ModelForm):
-    class Meta:
-        model = models.Travel
-        fields = ['vehicle', 'datetime', 'origin', 'destination', 'is_two_way', 'price']
+        fields = ['vehicle_type', 'capacity', 'plaque', 'admin']
 
 
 class TicketForm(forms.ModelForm):

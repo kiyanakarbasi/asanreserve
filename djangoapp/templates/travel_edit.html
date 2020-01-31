@@ -21,7 +21,6 @@
                     <li class="list-group-item">{{ travel.is_two_way|yesno:"two way,one way" }}</li>
                     <li class="list-group-item">price: {{ travel.price }}T</li>
                     <li class="list-group-item">capacity: {{ travel.vehicle.capacity }}</li>
-                    <li class="list-group-item">free capacity: {{ info.free }}</li>
 
                 </ul>
             </div>
@@ -30,23 +29,25 @@
             <h1>Ticket Form</h1>
             <div>
                 <form method="POST">{% csrf_token %}
-                    <input type="text" name="buyer_name" required placeholder="Name">
-                    <input type="text" name="buyer_phone" required placeholder="Phone">
-                    <select name="buyer_sex">
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                    </select>
+                    <input hidden name="new_travel" type="text">
 
-                    <input hidden type="text" name="travel" value="{{ travel.id }}">
-                    <select name="seat_number">
-                        {% for i in info.seats %}
-                        <option value="{{ i }}">{{ i }}</option>
+                    <input type="datetime" id="datetimeid" name="datetime" required placeholder="date and time" value="{{ travel.datetime }}">
+                    <input type="text" name="origin" required placeholder="origin" value="{{ travel.origin }}">
+                    <input type="text" name="destination" required placeholder="destination" value="{{ travel.destination }}">
+                    <span>
+                        two whay
+                        <input type="checkbox" name="is_two_way" id="" {{ travel.is_two_way|yesno:"checked," }}>
+                    </span>
+                    <input type="number" name="price" required placeholder="price" value="{{ travel.price }}">
+                    <select name="vehicle">
+                        {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}">{{ vehicle.plaque }}</option>
                         {% endfor %}
                     </select>
-
-                    <button type="submit">Buy</button>
+                    <button type="submit">Submit</button>
 
                 </form>
+
             </div>
 
         </div>

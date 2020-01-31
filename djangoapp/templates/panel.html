@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title>travel | asanreserve</title>
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+
+
+
+
+
+    <div class="row">
+
+        {% for vehicle in vehicles %}
+
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    {{ vehicle.vehicle_type }}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">capacity: {{ vehicle.capacity }}</li>
+                    <li class="list-group-item">plaque: {{ vehicle.plaque }}</li>
+                    <li class="list-group-item"><a href="{% url 'vehicle_delete' id=vehicle.id %}">delete</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    <h1>New vehicle</h1>
+                </div>
+
+                <div class="card-body">
+                    <form method="POST">{% csrf_token %}
+                        <input hidden name="new_vehicle" type="text">
+                        <input hidden type="number" name="admin" value="{{ request.user.id }}">
+                        <select name="vehicle_type">
+                            <option value="bus">bus</option>
+                            <option value="ship">ship</option>
+                            <option value="airplane">airplane</option>
+                            <option value="train">train</option>
+                        </select>
+                        <input type="number" name="capacity" required placeholder="capacity">
+                        <input type="text" name="plaque" required placeholder="plaque">
+                        <button type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+    <hr>
+
+
+
+    <div class="row">
+
+        {% for travel in travels %}
+
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    {{ travel.vehicle.vehicle_type }}
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">time: {{ travel.datetime }}</li>
+                    <li class="list-group-item">origin: {{ travel.origin }}</li>
+                    <li class="list-group-item">destination: {{ travel.destination }}</li>
+                    <li class="list-group-item">{{ travel.is_two_way|yesno:"two way,one way" }}</li>
+                    <li class="list-group-item">price: {{ travel.price }}T</li>
+                    <li class="list-group-item">capacity: {{ travel.vehicle.capacity }}</li>
+                    <li class="list-group-item"><a href="{% url 'travel_delete' id=travel.id %}">delete</a></li>
+                    <li class="list-group-item"><a href="{% url 'travel_edit' id=travel.id %}">edit</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem; padding-bottom: 50px;">
+                <div class="card-header">
+                    <h1>New Travel</h1>
+                </div>
+
+                <div class="card-body">
+                    <form method="POST">{% csrf_token %}
+                        <input hidden name="new_travel" type="text">
+
+                        <input type="datetime" id="datetimeid" name="datetime" required placeholder="date and time">
+                        <input type="text" name="origin" required placeholder="origin">
+                        <input type="text" name="destination" required placeholder="destination">
+                        <span>
+                            two whay
+                            <input type="checkbox" name="is_two_way" id="">
+                        </span>
+                        <input type="number" name="price" required placeholder="price">
+                        <select name="vehicle">
+                            {% for vehicle in vehicles %}
+                            <option value="{{ vehicle.id }}">{{ vehicle.plaque }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+$(function () {
+    $("#datetimeid").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+    });
+  });
+</script>
+{% endblock %}
